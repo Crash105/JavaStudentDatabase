@@ -12,6 +12,7 @@ public class Student {
     private int tuitionBalance;
     private static int costOfCourse = 600;
     private static int id = 1000;
+    // static is speciifc to not one object but all objects
 
     public Student() {
         Scanner scan = new Scanner(System.in);
@@ -22,23 +23,14 @@ public class Student {
         System.out.println("Enter Grade Year:\n1 - Freshment\n2 for Sophmore\n3 for Junior\n4 for Senior");
         this.gradeYear = scan.nextInt();
 
-        studentID = generateID();
         id++;
+        setStudentID();
 
     }
 
-    public String generateID() {
-        String passwordSet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890!@#$%^&*";
-        Random rand = new Random();
-        StringBuilder sb1 = new StringBuilder("");
-        sb1.append(gradeYear);
-        for (int i = 0; i < 4; i++) {
-            int rand_int = rand.nextInt(70);
-            sb1.append(passwordSet.charAt(rand_int));
-        }
-        String newpassword = sb1.toString();
+    public void setStudentID() {
 
-        return newpassword;
+        this.studentID = gradeYear + "" + id;
 
     }
 
@@ -66,8 +58,13 @@ public class Student {
 
     }
 
-    public void payTution(int pay) {
+    public void payTution() {
+        System.out.println("Enter your payment");
+        Scanner scan = new Scanner(System.in);
+        int pay = scan.nextInt();
         tuitionBalance = tuitionBalance - pay;
+        System.out.println("Thank you for your payment of: " + pay);
+        System.out.println(viewBalance());
     }
 
     public int viewBalance() {
@@ -79,7 +76,8 @@ public class Student {
     }
 
     public String showInfo() {
-        return "FirstName: " + firstName + "\nLastName: " + lastName + "\nID" + studentID + "\nCourses Enrolled: "
+        return "FirstName: " + firstName + "\nLastName: " + lastName + "\nGradeYear: " + gradeYear + "\nID: "
+                + studentID + "\nCourses Enrolled: "
                 + courses + "\nTution Balance: " + tuitionBalance;
     }
 

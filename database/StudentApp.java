@@ -8,10 +8,17 @@ public class StudentApp {
         System.out.println("How many Students Do you want in your database");
         int numofStudents = scan.nextInt();
 
+        Student[] students = new Student[numofStudents];
+
         for (int i = 0; i < numofStudents; i++) {
-            Student sdn = new Student();
-            sdn.addCourse();
-            System.out.println(sdn.getBalance());
+            students[i] = new Student();
+            students[i].addCourse();
+            students[i].payTution();
+        }
+
+        for (int i = 0; i < numofStudents; i++) {
+            System.out.println(students[i].showInfo());
+
         }
 
     }
